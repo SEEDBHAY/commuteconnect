@@ -103,8 +103,8 @@ class _LogInState extends State<LogIn> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Password';
-                          }
-                          return null;
+                          }else
+                            return null;
                         },
                         decoration: InputDecoration(
                             border: InputBorder.none,

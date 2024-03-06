@@ -11,15 +11,14 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String email = "", password = "", name = "";
-  TextEditingController namecontroller = new TextEditingController();
+  String email = "", password = "";
   TextEditingController passwordcontroller = new TextEditingController();
   TextEditingController mailcontroller = new TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
 
   registration() async {
-    if (password != null&& namecontroller.text!=""&& mailcontroller.text!="") {
+    if (mailcontroller.text!="") {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
@@ -82,30 +81,6 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter Name';
-                          }
-                          return null;
-                        },
-                        controller: namecontroller,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Name",
-                            hintStyle: TextStyle(
-                                color: Color(0xFFb2b7bf), fontSize: 18.0)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 2.0, horizontal: 30.0),
-                      decoration: BoxDecoration(
-                          color: Color(0xFFedf0f8),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
                             return 'Please Enter Email';
                           }
                           return null;
@@ -151,7 +126,6 @@ class _SignUpState extends State<SignUp> {
                         if(_formkey.currentState!.validate()){
                           setState(() {
                             email=mailcontroller.text;
-                            name= namecontroller.text;
                             password=passwordcontroller.text;
                           });
                         }
